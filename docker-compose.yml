@@ -1,0 +1,21 @@
+version: '3'
+services:
+  web:
+    build: ./server
+    container_name: "centos7_lemp"
+    ports:
+      - "8080:80"
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=pass
+      # MYSQL_DATABASE: default
+      # MYSQL_USER: default
+      # MYSQL_PASSWORD: secret
+    volumes:
+      - ./source:/home/docker/source
+      - ./mysql/data:/var/lib/mysql
+      - ./mysql/logs:/var/log/mysql
+    working_dir: /home/docker
+    privileged: true
+    command: /sbin/init
+    tty: true
